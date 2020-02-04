@@ -1,15 +1,32 @@
 // const puppeteer = require(puppeteer)
 import puppeteer from 'puppeteer'
 import Homepage from './homepage'
+import { step } from 'mocha-steps'
 
-describe('Loads URL', () => {
-  it('should work', async () => {
-    const browser = await puppeteer.launch({ headless: false })
-    const page = await browser.newPage()
-    const homepage = new Homepage(page)
-    // await page.goto('http://zero.webappsecurity.com/index.html')
-    await homepage.visit()
-    await page.waitFor(5000)
+describe('Mocha steps test', () => {
+  let browser
+  let page
+
+  before(async () => {
+    browser = await puppeteer.launch({ headless: false })
+    page = await browser.newPage()
+    await page.setDefaultTimeout(7000)
+  })
+
+  after(async () => {
     await browser.close()
+  })
+
+  step('should load homepage', async () => {
+    const homepage = new Homepage(page)
+    await homepage.visit()
+  })
+
+  step('step 2', async () => {
+    await page.waitForSelector('#FAIL')
+  })
+
+  step('step 3', async () => {
+    await page.waitForSelector('#FAIL')
   })
 })

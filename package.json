@@ -4,7 +4,7 @@
   "description": "tips and tricks",
   "main": "index.js",
   "scripts": {
-    "test": "./node_modules/mocha/bin/mocha --timeout=10000 ./build/**.js",
+    "test": "./node_modules/mocha/bin/mocha --timeout=10000 --require mocha-steps ./build/**.js",
     "clean": "rm -rf build",
     "build": "babel --presets es2015 -d build/ tests/"
   },
@@ -13,6 +13,7 @@
   "dependencies": {
     "chai": "^4.2.0",
     "mocha": "^7.0.1",
+    "mocha-steps": "^1.3.0",
     "puppeteer": "^2.1.0",
     "puppeteer-firefox": "^0.5.1"
   },
